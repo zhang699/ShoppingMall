@@ -1,0 +1,23 @@
+{
+  "rnc2": {
+    "prefix": "rnc2",
+    "body": [
+      "import React, {Component } from 'react'",
+      "import PropTypes from 'prop-types'",
+      "import { StyleSheet, View , ViewPropTypes, Text } from 'react-native'",
+      "const styles = StyleSheet.create({",
+      "})",
+      "export default class ${1:ClassName} extends Component {",
+      "",
+      "  render(){",
+      "    return (",
+      "       <View>",
+      "          <Text></Text>",
+      "       </View>",
+      "    )",
+      "  }",
+      "} "
+    ],
+    "description": "Show react"
+  }
+}

@@ -17,12 +17,16 @@
     "port": 5678
   },
   "dependencies": {
+    "@firebase/firestore": "^0.5.4",
     "immutable": "^3.7.6",
     "lodash": "^4.3.0",
     "prop-types": "^15.6.0",
     "react": "16.2.0",
     "react-native": "^0.51.0",
-    "react-navigation": "^1.0.0-beta.13",
+    "react-native-camera": "^1.1.4",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^1.0.0-beta.15",
+    "react-navigation-redux-helpers": "^1.1.2",
     "react-redux": "^5.0.3",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1"

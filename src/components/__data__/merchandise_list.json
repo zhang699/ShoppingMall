@@ -1,0 +1,94 @@
+[
+  {
+    "id": 1,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/08af7e4f7c83b53ee4d3acb2d1f19b88_tn",
+    "discount": 0.8,
+    "price": 200,
+    "stars": 6819,
+    "title":
+      "[免運] 多件優惠 MIT台灣製-防潑水多功能桌上螢幕架 桌上架 鍵盤架 收納架 電腦架 ㄇ型架 ST004 居家大師",
+    "count": 12
+  },
+  {
+    "id": 2,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/4bd842fc7124ee9d7c5c28669116aa0b_tn",
+    "discount": 1,
+    "title": "《Jami Honey》【JI1853】工業風鹿角黑白灰美式亮面立體牆面無痕掛勾 掛勾 掛鉤 鹿頭掛勾",
+    "stars": 3621,
+    "price": 699,
+    "count": 1
+  },
+  {
+    "id": 3,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/78272f9b830d8c0f25e93d1724962749_tn",
+    "discount": 1,
+    "stars": 10,
+    "price": 300,
+    "title":
+      "雪碧推薦》厚款✨送兩組口紅架 360度旋轉化妝品收納盒 化妝櫃 壓克力收納盒 收納架 桌面收納 化妝盒 化妝用品",
+    "count": 22
+  },
+  {
+    "id": 4,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/0ef0e5bddefd24a250a6d7d0a1ef9a0e_tn",
+    "discount": 1,
+    "title":
+      "[全現貨]可以超取！網格串燈鐵網網片收納居家房間宿舍寢室佈置少女心掛布拍立得照片法式粉燈串牆面收納拍攝龜貝葉拍攝道具",
+    "price": 140,
+    "stars": 225,
+    "count": 4
+  },
+  {
+    "id": 5,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/522ee2e5b3706e92d57d5e6c9a32f9cf_tn",
+    "title":
+      "【今日免運費！實拍+用給你看】 LED數字時鐘 時尚工業風 立體電子時鐘 可壁掛 科技電子鐘 數字鐘 電子鬧鐘 掛鐘",
+    "discount": 1,
+    "price": 499,
+    "stars": 120,
+    "count": 7
+  },
+  {
+    "id": 6,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/ee7ee0b0b334821581fccbce6916c431_tn",
+    "title": "透氣防潑水技術處理床包式保潔墊(綜合賣場)單人/雙人/加大/特大【現貨】另有加高訂做",
+    "stars": 4000,
+    "price": 220,
+    "discount": 0.85,
+    "count": 1
+  },
+  {
+    "id": 7,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/4add03bdf1afea9b0aab332f8d35b26c_tn",
+    "title": "FUN先生設計 可愛爆了！卡通分格小碟子小吃蘸料碟 創意餐具調料碟 醋碟 調味碟 盤子",
+    "stars": 8104,
+    "price": 21,
+    "discount": 0.6,
+    "count": 2
+  },
+  {
+    "id": 8,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/8dd4f7043c7ebd3c2d18f7310e6863d7_tn",
+    "title": "Kirkland 柯克蘭 抽取式 衛生紙 三層 家庭號 #109999 好市多 代購",
+    "stars": 13,
+    "discount": 1,
+    "price": 15,
+    "count": 9
+  },
+  {
+    "id": 9,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/40d0cf1b4eebe068037276e573036aff_tn",
+    "title": "「現貨」Ariel Laundry Liquid 抗菌 防臭 洗衣精 補充包 720g #107445 好市多 代購",
+    "stars": 22,
+    "price": 459,
+    "count": 5
+  },
+  {
+    "id": 10,
+    "picture_url": "https://cfshopeetw-a.akamaihd.net/file/166a894229f00e795620359dca6a7320_tn",
+    "title": "膳魔師保溫杯 HELLO KITTY 40週年紀念篇 JMZ-350KT-PRP",
+    "stars": 6,
+    "price": 370,
+    "count": 1
+  }
+]

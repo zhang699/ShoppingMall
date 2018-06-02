@@ -3,6 +3,7 @@
 import { Platform } from 'react-native';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+
 import reducer from './reducers';
 import * as actionCreators from './actions/counter';
 
@@ -14,7 +15,7 @@ if (__DEV__) {
     require('remote-redux-devtools').composeWithDevTools)({
     name: Platform.OS,
     ...require('../package.json').remotedev,
-    actionCreators,
+    actionCreators
   });
   /* eslint-enable no-underscore-dangle */
 }

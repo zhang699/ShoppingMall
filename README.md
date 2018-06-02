@@ -1,3 +1,10 @@
+### Troubleshotting
+
+`Parsing error: Adjacent JSX elements must be wrapped in an enclosing tag`
+
+Solution: `<View />`
+Fork from [React Native Boilerplate]()
+
 # React Native Boilerplate
 
 [![Build Status](https://travis-ci.org/jhen0409/react-native-boilerplate.svg)](https://travis-ci.org/jhen0409/react-native-boilerplate)
