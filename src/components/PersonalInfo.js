@@ -88,13 +88,15 @@ export default class PersonalInfo extends Component {
     });
   };
 
-  goMerchandiseList = () => {};
+  goMerchandiseList = () => {
+    this.props.navigation.navigate('MerchandiseList');
+  };
 
   goAvatarCamera = () => {
     this.props.navigation.navigate('Camera', { key: 'avatar', to: 'PersonalInfo' });
   };
   renderPersonAvatar = (name) => {
-    const { uri } = this.props.navigation.state.params;
+    const { uri } = this.props.navigation.state.params || {};
     const avatarSouce = uri && uri.avatar ? { uri: uri.avatar } : emptyAvatar;
     return (
       <View style={styles.person}>

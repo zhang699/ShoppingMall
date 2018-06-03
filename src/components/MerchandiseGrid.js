@@ -62,7 +62,7 @@ export default class MerchandiseGrid extends Component {
     }, 1);
   };
   onTabPress = (tab) => {
-    console.warn('press tab', tab``);
+    console.warn('press tab', tab);
     this.onRefresh();
   };
 

@@ -39,7 +39,7 @@ export default class MerchandiseList extends Component {
   keyExtractor = item => item.price;
 
   newMerchandise = () => {
-    this.props.navigation.navigate('newMerchandise');
+    this.props.navigation.navigate('NewMerchandise');
   };
 
   renderItem = ({ item }) => (

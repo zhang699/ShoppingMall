@@ -44,7 +44,7 @@ export default class NewMerchandise extends Component {
   }
 
   componentDidMount() {
-    this.props.navigation.addListener('focus', () => {});
+    //this.props.navigation.addListener('focus', () => {});
   }
 
   onTitleChange = (text) => {
