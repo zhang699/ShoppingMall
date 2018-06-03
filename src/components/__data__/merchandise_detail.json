@@ -1,0 +1,50 @@
+{
+  "picture_urls": [
+    "https://cfshopeetw-a.akamaihd.net/file/4bd842fc7124ee9d7c5c28669116aa0b",
+    "https://cfshopeetw-a.akamaihd.net/file/78272f9b830d8c0f25e93d1724962749",
+    "https://cfshopeetw-a.akamaihd.net/file/0ef0e5bddefd24a250a6d7d0a1ef9a0e"
+  ],
+  "title":
+    "【今日免運費！實拍+用給你看】 LED數字時鐘 時尚工業風 立體電子時鐘 可壁掛 科技電子鐘 數字鐘 電子鬧鐘 ",
+  "price": "200",
+  "discount": "0.2",
+  "count": 3,
+  "description":
+    "<!DOCTYPE html><html> <head> <meta charset='utf-8'></meta> </head> <body><h1>這是產品介紹，非常厲害的喔</h1> <br/> <a href='https://www.google.com.tw'>另一個產品連結</a> <br/> <br/> <br/> <h4>換行再換行</h4> <br/> <br/> <br/> <h5>我是最後一行</h5></body></html>",
+  "user": {
+    "name": "王大明",
+    "evaluation": 2000,
+    "avatar": "https://cfshopeetw-a.akamaihd.net/file/0ef0e5bddefd24a250a6d7d0a1ef9a0e"
+  },
+  "comments": [
+    {
+      "id": 0,
+      "from": "user_id_1",
+      "content": "這是哪裡可用啊",
+      "time": "2018-02-12 18:00:00Z",
+      "replies": [
+        {
+          "type": "me",
+          "content": "好的"
+        },
+        {
+          "from": "userId",
+          "type": "me",
+          "content": "是哪裡有問題？"
+        }
+      ]
+    },
+    {
+      "id": 1,
+      "from": "user_id_2",
+      "time": "2018-02-11 18:00:00Z",
+      "content": "您好，我有其他問題",
+      "replies": [
+        {
+          "type": "me",
+          "content": "請說"
+        }
+      ]
+    }
+  ]
+}

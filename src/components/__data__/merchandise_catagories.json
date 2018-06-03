@@ -1,0 +1,30 @@
+[
+  {
+    "type": "3c",
+    "text": "3C 產品"
+  },
+  {
+    "type": "life",
+    "text": "生活居家"
+  },
+  {
+    "type": "library",
+    "text": "圖書"
+  },
+  {
+    "type": "eat",
+    "text": "小吃"
+  },
+  {
+    "type": "female_clothe",
+    "text": "女性服飾"
+  },
+  {
+    "type": "male_clothe",
+    "text": "男性服飾"
+  },
+  {
+    "type": "movie_music",
+    "text": "影音相關"
+  }
+]

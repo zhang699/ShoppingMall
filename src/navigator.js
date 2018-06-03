@@ -7,6 +7,7 @@ import PersonalInfo from './components/PersonalInfo';
 import MerchandiseList from './components/MerchandiseList';
 import NewMerchandise from './components/NewMerchandise';
 import MerchandiseGrid from './components/MerchandiseGrid';
+import MerchandiseDetail from './components/MerchandiseDetail';
 
 const AppNavigator = new StackNavigator(
   {
@@ -16,7 +17,8 @@ const AppNavigator = new StackNavigator(
     PersonalInfo: { screen: PersonalInfo },
     MerchandiseList: { screen: MerchandiseList },
     NewMerchandise: { screen: NewMerchandise },
-    MerchandiseGrid: { screen: MerchandiseGrid }
+    MerchandiseGrid: { screen: MerchandiseGrid },
+    MerchandiseDetail: { screen: MerchandiseDetail }
   },
   {
     headerMode: 'screen',
