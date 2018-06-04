@@ -22,9 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     margin: 10
   },
-  description: {
-    height: 200
-  }
+  description: {}
 });
 export default class NewMerchandise extends Component {
   static propTypes = {
@@ -163,7 +161,6 @@ export default class NewMerchandise extends Component {
         {this.state.showToolBar && (
           <View style={styles.descriptionToolBar}>
             <Icon.Button onPress={this.attachLink} color="white" name="link" size={56} />
-            <Icon.Button onPress={this.bolderSelection} color="white" name="link" size={56} />
           </View>
         )}
 

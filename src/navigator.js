@@ -11,6 +11,8 @@ import NewMerchandise from './components/NewMerchandise';
 import MerchandiseGrid from './components/MerchandiseGrid';
 import MerchandiseDetail from './components/MerchandiseDetail';
 import TransactionRecord from './components/TransactionRecord';
+import ShoppingCart from './components/ShoppingCart';
+import Test from './components/Test';
 
 const styles = StyleSheet.create({
   tabBar: {
@@ -23,6 +25,9 @@ const styles = StyleSheet.create({
 
 const AppNavigator = new TabNavigator(
   {
+    Test: {
+      screen: Test
+    },
     PersonalInfo: {
       screen: new StackNavigator({
         PersonalInfo: { screen: PersonalInfo, navigationOptions: { title: '個人資訊' } },
@@ -34,11 +39,15 @@ const AppNavigator = new TabNavigator(
     MerchandiseGrid: { screen: MerchandiseGrid, navigationOptions: { title: '商城' } },
     MerchandiseDetail: {
       screen: MerchandiseDetail,
-      navigationOptions: { title: '商品詳細', tabBarVisible: true }
+      navigationOptions: { title: '商品詳細' }
     },
     TransactionRecord: {
       screen: TransactionRecord,
-      navigationOptions: { title: '交易紀錄', tabBarVisible: true }
+      navigationOptions: { title: '交易紀錄' }
+    },
+    ShoppingCart: {
+      screen: ShoppingCart,
+      navigationOptions: { title: '購物車' }
     }
   },
   {
@@ -52,7 +61,8 @@ const AppNavigator = new TabNavigator(
           NewMerchandise: 'plus',
           MerchandiseGrid: 'th',
           MerchandiseDetail: 'info-circle',
-          TransactionRecord: 'list'
+          TransactionRecord: 'list',
+          ShoppingCart: 'shopping-cart'
         };
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons

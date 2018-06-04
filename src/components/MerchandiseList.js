@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Text, FlatList, Image, Button, TouchableOpacity } from 'react-native';
 import MOCK from './__data__/merchandise_list.json';
+import connectModal from './hoc/connectModal';
 
 const styles = StyleSheet.create({
   container: {
@@ -25,12 +26,23 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     height: 100,
     flexDirection: 'row'
+  },
+  modal: {
+    flex: 1,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  buttonContainer: {
+    flex: 1
   }
 });
 
-export default class MerchandiseList extends Component {
+class MerchandiseList extends Component {
   static propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    openModal: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired
   };
   state = {
     data: MOCK
@@ -38,12 +50,39 @@ export default class MerchandiseList extends Component {
 
   keyExtractor = item => item.price;
 
-  newMerchandise = () => {
+  goMerchandiseList = () => {
     this.props.navigation.navigate('NewMerchandise');
   };
 
+  onMerchandisePress = (item) => {
+    this.props.openModal({ modalView: this.modal, context: item });
+  };
+
+  removeItem = (item) => {
+    console.warn('prepare to remove item...', item);
+  };
+  modal = ({ context }) => (
+    <View style={styles.modal}>
+      <View style={styles.buttonContainer}>
+        <Button
+          color="red"
+          title="刪除"
+          onPress={() => {
+            this.removeItem(context);
+            this.props.closeModal();
+          }}
+        />
+      </View>
+    </View>
+  );
   renderItem = ({ item }) => (
-    <TouchableOpacity onPress={this.newMerchandise} activeOpacity={0.7}>
+    <TouchableOpacity
+      onLongPress={() => {
+        this.onMerchandisePress(item);
+      }}
+      onPress={() => {}}
+      activeOpacity={0.7}
+    >
       <View style={styles.listItem}>
         <Image style={styles.thumbnail} source={{ uri: item.picture_url }} />
         <Text numberOfLines={1} ellipsizeMode="tail" style={styles.itemText}>
@@ -62,8 +101,10 @@ export default class MerchandiseList extends Component {
           renderItem={this.renderItem}
         />
 
-        <Button onPress={this.newMerchandise} title="新增商品" />
+        <Button onPress={this.goMerchandiseList} title="新增商品" />
       </View>
     );
   }
 }
+
+export default connectModal(MerchandiseList);

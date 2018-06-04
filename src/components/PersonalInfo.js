@@ -76,7 +76,8 @@ export default class PersonalInfo extends Component {
       tel: '',
       name: '',
       address: ''
-    }
+    },
+    avatarUri: ''
   };
 
   fillForm = name => (text) => {
@@ -93,11 +94,16 @@ export default class PersonalInfo extends Component {
   };
 
   goAvatarCamera = () => {
-    this.props.navigation.navigate('Camera', { key: 'avatar', to: 'PersonalInfo' });
+    const onTakePicture = (key, uri) => {
+      this.setState({
+        avatarUri: uri
+      });
+    };
+    this.props.navigation.navigate('Camera', { key: 'avatar', onTakePicture });
   };
   renderPersonAvatar = (name) => {
-    const { uri } = this.props.navigation.state.params || {};
-    const avatarSouce = uri && uri.avatar ? { uri: uri.avatar } : emptyAvatar;
+    const { avatarUri } = this.state;
+    const avatarSouce = avatarUri ? { uri: avatarUri } : emptyAvatar;
     return (
       <View style={styles.person}>
         <TouchableOpacity onPress={this.goAvatarCamera} style={styles.cameraContainer}>

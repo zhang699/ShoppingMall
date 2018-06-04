@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Text, FlatList, Image, TouchableOpacity, TextInput } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  FlatList,
+  Image,
+  TouchableOpacity,
+  TextInput,
+  AppState
+} from 'react-native';
 import TabBar from './TabBar';
 import MOCK from './__data__/merchandise_list.json';
 import MOCK_CATAGORIES from './__data__/merchandise_catagories.json';
@@ -43,7 +52,8 @@ const TABS = MOCK_CATAGORIES;
 export default class MerchandiseGrid extends Component {
   state = {
     data: MOCK,
-    refreshing: false
+    refreshing: false,
+    appState: AppState.currentState
   };
 
   keyExtractor = item => item.price;
@@ -59,7 +69,7 @@ export default class MerchandiseGrid extends Component {
         refreshing: false,
         data: this.shuffle(this.state.data)
       });
-    }, 1);
+    }, 1000);
   };
   onTabPress = (tab) => {
     console.warn('press tab', tab);
@@ -75,6 +85,20 @@ export default class MerchandiseGrid extends Component {
       <Text style={styles.price}>{`$${item.price}`}</Text>
     </TouchableOpacity>
   );
+
+  handleAppStateChange = (nextAppState) => {
+    if (nextAppState === 'active') {
+      this.onRefresh();
+    }
+  };
+  componentDidMount() {
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+  componentWillUnmount() {
+    AppState.removeEventListener('change', this.handleAppStateChange);
+  }
+
   render() {
     return (
       <View style={styles.container}>
