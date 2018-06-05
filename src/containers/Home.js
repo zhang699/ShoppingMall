@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Text } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#F5FCFF'
+    backgroundColor: '#F5FCFF',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   welcome: {
     fontSize: 20,
@@ -24,17 +26,23 @@ export default class Home extends Component {
     navigation: PropTypes.object.isRequired
   };
 
-  toCounter = () => {
-    this.props.navigation.navigate('Counter');
+  toCamera = () => {
+    this.props.navigation.navigate('Camera');
   };
 
   render() {
+    const yourWindow = Dimensions.get('window');
+
     return (
       <View style={styles.container}>
-        {/*<Text style={styles.welcome}>Welcome to React Native Boilerplate!</Text>
-        <TouchableOpacity onPress={this.toCounter}>
-          <Text style={styles.instructions}>Navigate to Counter</Text>
-        </TouchableOpacity>*/}
+        <Text style={styles.welcome}>
+          {`Welcome to React Native Boilerplate!, your dimesnion is ${yourWindow.width}, ${
+            yourWindow.height
+          }`}
+        </Text>
+        <TouchableOpacity onPress={this.toCamera}>
+          <Text style={styles.instructions}>Test your Camera</Text>
+        </TouchableOpacity>
       </View>
     );
   }

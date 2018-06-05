@@ -85,8 +85,8 @@ const AppNavigator = new TabNavigator(
 
 const RootNavigator = new StackNavigator(
   {
-    App: { screen: AppNavigator },
     Home: { screen: Home },
+    App: { screen: AppNavigator },
     Counter: { screen: Counter },
     Camera: { screen: Camera }
   },
