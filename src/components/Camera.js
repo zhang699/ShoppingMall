@@ -37,7 +37,7 @@ export default class Camera extends Component {
   takePicture = async () => {
     if (this.camera) {
       const { cameraConfig, key, onTakePicture } = this.props.navigation.state.params;
-      const options = cameraConfig || { quality: 0.5, base64: true };
+      const options = cameraConfig || { quality: 1, base64: true };
 
       const data = await this.camera.takePictureAsync(options);
       if (onTakePicture) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, Image, TextInput, Button, TouchableOpacity } from 'react-native';
-
+import RNFetchBlob from 'react-native-fetch-blob';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
@@ -94,9 +94,29 @@ export default class PersonalInfo extends Component {
   };
 
   goAvatarCamera = () => {
-    const onTakePicture = (key, uri) => {
+    const onTakePicture = async (key, uri) => {
       this.setState({
-        avatarUri: uri
+        avatarUri: uri,
+        uploading: true
+      });
+      // upload to Google Cloud Storage
+
+      const result = await RNFetchBlob.fetch(
+        'POST',
+        `https://www.googleapis.com/upload/storage/v1/b/staging.auctionmall-53ad1.appspot.com/o?uploadType=media&name=${new Date().getTime()}`,
+        {
+          Authorization:
+            'Bearer ya29.GlvRBaKCJmi2h1H3HTfjJAZwk4XVJQWP6ak72R5ymJCpk1DKzPuzgFg2Vuv7YYzuz3zfO0u1jv6j9VdDaYYIViOe5B25c0AZhThUtXzvTywC0lHKCHe45WQ-NwTB'
+        },
+        RNFetchBlob.wrap(uri)
+      );
+      if (result.error) {
+        this.setState({
+          uploadError: true
+        });
+      }
+      this.setState({
+        uploading: false
       });
     };
     this.props.navigation.navigate('Camera', { key: 'avatar', onTakePicture });
@@ -166,7 +186,11 @@ export default class PersonalInfo extends Component {
             }}
           />
         </View>
-        <Button title="前往商品清單" onPress={this.goMerchandiseList} />
+        <Button
+          disabled={this.state.uploading}
+          title="前往商品清單"
+          onPress={this.goMerchandiseList}
+        />
       </View>
     );
   }
