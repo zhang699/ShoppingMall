@@ -12,6 +12,7 @@
   "description":
     "<!DOCTYPE html><html> <head> <meta charset='utf-8'></meta> </head> <body><h1>這是產品介紹，非常厲害的喔</h1> <br/> <a href='https://www.google.com.tw'>另一個產品連結</a> <br/> <br/> <br/> <h4>換行再換行</h4> <br/> <br/> <br/> <h5>我是最後一行</h5></body></html>",
   "user": {
+    "phone": "0955123456",
     "name": "王大明",
     "evaluation": 2000,
     "avatar": "https://cfshopeetw-a.akamaihd.net/file/0ef0e5bddefd24a250a6d7d0a1ef9a0e"

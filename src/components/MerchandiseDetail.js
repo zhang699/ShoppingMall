@@ -9,7 +9,8 @@ import {
   ScrollView,
   TextInput,
   WebView,
-  Linking
+  Linking,
+  TouchableOpacity
 } from 'react-native';
 import ImageGallery from './ImageGallery';
 import Comments from './Comments';
@@ -87,6 +88,9 @@ export default class MerchandiseDetail extends Component {
   onReplyPress = () => {};
   addComment = () => {};
   addToCart = () => {};
+  goPhoneURL = (phone) => {
+    Linking.openURL(`tel://${phone}`);
+  };
   render() {
     const { productDetail } = this.state;
     const showAddToCart = false;
@@ -111,6 +115,13 @@ export default class MerchandiseDetail extends Component {
               <Text style={[styles.evaluationTitle, styles.title]}>
                 {`評價：${productDetail.user.evaluation}`}
               </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  this.goPhoneURL(productDetail.user.phone);
+                }}
+              >
+                <Text style={[styles.title]}>{`電話${productDetail.user.phone}`}</Text>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -118,6 +129,7 @@ export default class MerchandiseDetail extends Component {
             <Text style={styles.title}>{productDetail.title}</Text>
 
             <Text style={[styles.price, styles.metaInfo]}>{`$${productDetail.price}元`}</Text>
+
             <Text style={[styles.count, styles.metaInfo]}>{`剩餘數量:${productDetail.count}`}</Text>
           </View>
 

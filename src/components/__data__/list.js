@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     borderColor: 'black'
   }
 });
-export default class MerchandiseList extends Component {
+export default class $ { 1: example } extends Component {
   state = {
     data: [
       {
