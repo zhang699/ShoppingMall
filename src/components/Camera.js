@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: 'black'
+    backgroundColor: 'transparent'
   },
   preview: {
     flex: 1,
@@ -36,16 +36,13 @@ export default class Camera extends Component {
   };
   takePicture = async () => {
     if (this.camera) {
-      const {
-        cameraConfig, to, key, onTakePicture
-      } = this.props.navigation.state.params;
+      const { cameraConfig, key, onTakePicture } = this.props.navigation.state.params;
       const options = cameraConfig || { quality: 0.5, base64: true };
 
       const data = await this.camera.takePictureAsync(options);
       if (onTakePicture) {
         onTakePicture(key, data.uri);
       }
-      //this.props.navigation.navigate(to, { uri: { [key]: data.uri } });
       this.props.navigation.goBack();
     }
   };
@@ -62,11 +59,14 @@ export default class Camera extends Component {
           permissionDialogTitle="Permission to use camera"
           permissionDialogMessage="We need your permission to use your camera phone"
         />
-        <View style={{ flex: 0, flexDirection: 'row', justifyContent: 'center' }}>
-          {/*<TouchableOpacity onPress={this.takePicture} style={styles.capture}>
-            <Text style={{ fontSize: 14 }}> SNAP </Text>
-          </TouchableOpacity>*/}
-          <Icon.Button name="camera" size={72} onPress={this.takePicture} />
+        <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+          <Icon.Button
+            name="camera"
+            backgroundColor="transparent"
+            color="#222"
+            size={72}
+            onPress={this.takePicture}
+          />
         </View>
       </View>
     );

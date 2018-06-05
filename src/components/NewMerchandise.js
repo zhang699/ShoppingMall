@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { StyleSheet, View, TextInput, ScrollView, Button } from 'react-native';
+import { StyleSheet, View, TextInput, ScrollView, Button, AsyncStorage } from 'react-native';
 import PhotoItem from './PhotoItem';
 
 const styles = StyleSheet.create({
@@ -24,6 +24,8 @@ const styles = StyleSheet.create({
   },
   description: {}
 });
+
+const STORE_KEY = 'NewMerchandise';
 export default class NewMerchandise extends Component {
   static propTypes = {
     navigation: PropTypes.object.isRequired
@@ -41,18 +43,54 @@ export default class NewMerchandise extends Component {
     };
   }
 
-  componentDidMount() {
+  async componentWillMount() {
     //this.props.navigation.addListener('focus', () => {});
+
+    const form = await AsyncStorage.getItem(STORE_KEY);
+    if (form) {
+      this.setState({
+        ...this.state,
+        ...JSON.parse(form)
+      });
+    }
   }
 
   onTitleChange = (text) => {
+    this.setState(
+      {
+        title: text
+      },
+      () => {
+        AsyncStorage.setItem(STORE_KEY, this.composeStringForm());
+      }
+    );
+  };
+
+  onDescriptionSelectionChange = ({ nativeEvent }) => {
+    const { start, end } = nativeEvent.selection;
     this.setState({
-      title: text
+      descriptionStart: start,
+      descriptionEnd: end
+    });
+  };
+
+  onDescriptionChange = (text) => {
+    this.setState({
+      description: text
+    });
+    this.descriptionScrollRef.scrollToEnd();
+  };
+
+  composeStringForm = () => {
+    const { description, title, photos } = this.state;
+    return JSON.stringify({
+      description,
+      title,
+      photos
     });
   };
 
   attachLink = () => {
-    console.warn('attach link');
     const { description, descriptionStart, descriptionEnd } = this.state;
 
     const selectionString = description.substring(descriptionStart, descriptionEnd);
@@ -64,20 +102,6 @@ export default class NewMerchandise extends Component {
   };
   bolderSelection = () => {};
 
-  onDescriptionSelectionChange = ({ nativeEvent }) => {
-    const { start, end } = nativeEvent.selection;
-    this.setState({
-      descriptionStart: start,
-      descriptionEnd: end
-    });
-  };
-  onDescriptionChange = (text) => {
-    this.setState({
-      description: text
-    });
-    this.descriptionScrollRef.scrollToEnd();
-  };
-
   goMerchandiseCamera = (i) => {
     const { photos } = this.state;
 
@@ -87,9 +111,14 @@ export default class NewMerchandise extends Component {
         const newPhotos = [...photos];
         newPhotos[i].empty = false;
         newPhotos[i].uri = uri;
-        this.setState({
-          photos: newPhotos
-        });
+        this.setState(
+          {
+            photos: newPhotos
+          },
+          () => {
+            AsyncStorage.setItem(STORE_KEY, this.composeStringForm());
+          }
+        );
       };
       this.props.navigation.navigate('Camera', {
         to: 'NewMerchandise',
