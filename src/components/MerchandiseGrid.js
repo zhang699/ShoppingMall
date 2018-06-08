@@ -25,14 +25,23 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     shadowOffset: { width: 10, height: 10 },
     shadowColor: 'black',
-    margin: 10,
-    flex: 0.5
+    flex: 0.5,
+    margin: 10
+  },
+  thumbnailContainer: {
+    height: 150,
+    alignItems: 'flex-end'
   },
   thumbnail: {
-    height: 150
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0
   },
   title: {
-    fontSize: 22
+    fontSize: 22,
+    textDecorationLine: 'underline'
   },
   price: {
     alignSelf: 'flex-start',
@@ -46,11 +55,16 @@ const styles = StyleSheet.create({
     padding: 10
   },
   searchInput: {
-    fontSize: 36
+    fontSize: 20
   },
   center: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  discount: {
+    backgroundColor: 'red',
+    color: 'white',
+    width: 60
   }
 });
 
@@ -67,8 +81,9 @@ export default class MerchandiseGrid extends Component {
     appState: AppState.currentState
   };
 
-  keyExtractor = item => item.price;
-  goMerchandiseDetail = () => {};
+  goMerchandiseDetail = () => {
+    this.props.navigation.navigate('MerchandiseDetail');
+  };
 
   componentDidMount() {
     NetInfo.isConnected.addEventListener('connectionChange', this.handleConnectivity);
@@ -81,21 +96,29 @@ export default class MerchandiseGrid extends Component {
   }
 
   shuffle = arr => arr.sort(() => Math.random() - 0.5);
-  refresh = () => {
+  refresh = (add) => {
     this.setState({
       refreshing: true
     });
     setTimeout(() => {
-      this.setState({
-        refreshing: false,
-        data: this.shuffle(MOCK)
-      });
+      const mock = this.shuffle(MOCK.map(item => ({ ...item, id: new Date().getTime() })));
+
+      this.setState(
+        {
+          refreshing: false,
+          data: add ? this.state.data.concat(mock) : mock
+        },
+        () => {
+          console.warn('this.data', this.state.data.length);
+        }
+      );
     }, 1000);
   };
   onTabPress = (tab) => {
     this.refresh();
   };
 
+  keyExtractor = item => item.id;
   emptyView = () => {
     const { error } = this.state;
     return (
@@ -107,7 +130,10 @@ export default class MerchandiseGrid extends Component {
 
   renderItem = ({ item }) => (
     <TouchableOpacity onPress={this.goMerchandiseDetail} style={styles.listItem}>
-      <Image source={{ uri: item.picture_url }} style={styles.thumbnail} resizeMode="cover" />
+      <View style={styles.thumbnailContainer}>
+        <Image source={{ uri: item.picture_url }} style={styles.thumbnail} resizeMode="cover" />
+        {item.discount && <Text style={styles.discount}> {` ${item.discount * 10} 折`} </Text>}
+      </View>
       <Text style={styles.title} numberOfLines={1} ellipsizeMode="tail">
         {item.title}
       </Text>
@@ -150,7 +176,12 @@ export default class MerchandiseGrid extends Component {
           />
           <TabBar tabs={TABS} onTabPress={this.onTabPress} />
         </View>
-        <CenterEmptyViewFlatList
+        <FlatList
+          onEndReached={() => {
+            this.refresh(true);
+          }}
+          scrollEventThrottle={200}
+          onEndReachedThreshold={1}
           ListEmptyComponent={this.emptyView}
           refreshing={this.state.refreshing}
           onRefresh={this.refresh}

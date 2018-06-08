@@ -76,6 +76,9 @@ export default class Comments extends Component {
                     this.onReplyPress(comment);
                   }}
                   name="reply"
+                  backgroundColor="transparent"
+                  color="black"
+                  activeOpacity={0.7}
                   size={28}
                 />
               )}

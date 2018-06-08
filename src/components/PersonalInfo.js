@@ -40,20 +40,18 @@ const styles = StyleSheet.create({
   avatar: {
     width: 128,
     height: 128,
-    alignSelf: 'center',
     borderRadius: 64,
     borderColor: 'white',
     borderWidth: 2,
     position: 'absolute'
   },
   cameraContainer: {
-    width: 300,
-    height: 150,
+    width: 128,
+    height: 128,
     justifyContent: 'flex-end'
   },
   cameraIcon: {
-    alignSelf: 'flex-end',
-    width: 100
+    alignSelf: 'flex-end'
   },
   person: {
     alignItems: 'center'
@@ -106,7 +104,7 @@ export default class PersonalInfo extends Component {
         `https://www.googleapis.com/upload/storage/v1/b/staging.auctionmall-53ad1.appspot.com/o?uploadType=media&name=${new Date().getTime()}`,
         {
           Authorization:
-            'Bearer ya29.GlvRBaKCJmi2h1H3HTfjJAZwk4XVJQWP6ak72R5ymJCpk1DKzPuzgFg2Vuv7YYzuz3zfO0u1jv6j9VdDaYYIViOe5B25c0AZhThUtXzvTywC0lHKCHe45WQ-NwTB'
+            'Bearer ya29.GlzSBZwYYOh-VJhv3c8hEU8zlQpjjDxrkxjC1-69l8IC6RbQQ2ecmHuAyy2wGBdkIYo1AL7CRKtIqPtQO-5uII0z93lQp20pq2DQhcQ74e4gdD5LFr-Fxk4TVbKwHg'
         },
         RNFetchBlob.wrap(uri)
       );

@@ -132,7 +132,7 @@ export default class NewMerchandise extends Component {
     const { photos } = this.state;
     return (
       <View style={[styles.container]}>
-        <View style={[styles.form, styles.container]}>
+        <ScrollView style={[styles.form, styles.container]}>
           <TextInput
             placeholder="輸入商品名稱"
             value={this.state.title}
@@ -185,11 +185,11 @@ export default class NewMerchandise extends Component {
               }}
             />
           </ScrollView>
-        </View>
+        </ScrollView>
 
         {this.state.showToolBar && (
           <View style={styles.descriptionToolBar}>
-            <Icon.Button onPress={this.attachLink} color="white" name="link" size={56} />
+            <Icon.Button onPress={this.attachLink} color="white" name="link" size={22} />
           </View>
         )}
 

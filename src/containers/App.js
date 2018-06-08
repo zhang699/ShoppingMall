@@ -14,6 +14,15 @@ import AppNavigator from '../navigator';
 const middleware = createReactNavigationReduxMiddleware('root', state => state.nav);
 const addListener = createReduxBoundAddListener('root');
 
+if (!__DEV__) {
+  console.log = () => {};
+  console.info = () => {};
+  console.error = () => {};
+  console.warn = () => {};
+  console.debug = () => {};
+  console.trace = () => {};
+}
+
 @connect(
   state => ({
     nav: state.nav

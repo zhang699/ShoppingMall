@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import { StackNavigator, TabNavigator, TabBarBottom, TabBarTop } from 'react-navigation';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Home from './containers/Home';
@@ -12,35 +12,81 @@ import MerchandiseGrid from './components/MerchandiseGrid';
 import MerchandiseDetail from './components/MerchandiseDetail';
 import TransactionRecord from './components/TransactionRecord';
 import ShoppingCart from './components/ShoppingCart';
-import Test from './components/Test';
 
 const styles = StyleSheet.create({
   tabBar: {
-    height: 90
+    height: 52
   },
   tabLabel: {
     fontSize: 16
+  },
+  badge: {
+    position: 'absolute',
+    right: -20,
+    top: -10,
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    backgroundColor: '#e12',
+    color: 'white',
+    textAlign: 'center',
+    fontSize: 14
   }
 });
 
+const BadgeIcon = (props) => {
+  const { numberOfBadges } = props;
+  const show = !!numberOfBadges;
+  return (
+    <View>
+      <Icon {...props} />
+      {show && <Text style={styles.badge}> {`${numberOfBadges}`}</Text>}
+    </View>
+  );
+};
+
 const AppNavigator = new TabNavigator(
   {
-    Test: {
-      screen: Test
-    },
     PersonalInfo: {
-      screen: new StackNavigator({
-        PersonalInfo: { screen: PersonalInfo, navigationOptions: { title: '個人資訊' } },
-        MerchandiseList: { screen: MerchandiseList, navigationOptions: { title: '我的商品' } },
-        NewMerchandise: { screen: NewMerchandise, navigationOptions: { title: '建立商品' } }
-      }),
+      screen: new StackNavigator(
+        {
+          PersonalInfo: {
+            screen: PersonalInfo,
+            navigationOptions: { title: '個人資訊' }
+          },
+          MerchandiseList: {
+            screen: MerchandiseList,
+            navigationOptions: { title: '我的商品', tabBarVisible: false }
+          },
+          NewMerchandise: {
+            screen: NewMerchandise,
+            navigationOptions: { title: '建立商品', tabBarVisible: false }
+          }
+        },
+        { headerMode: 'screen' }
+      ),
       navigationOptions: { title: '個人資訊' }
     },
-    MerchandiseGrid: { screen: MerchandiseGrid, navigationOptions: { title: '商城' } },
-    MerchandiseDetail: {
-      screen: MerchandiseDetail,
-      navigationOptions: { title: '商品詳細' }
+
+    MerchandiseGrid: new StackNavigator(
+      {
+        MerchandiseGrid: {
+          screen: MerchandiseGrid,
+          navigationOptions: { title: '商城', header: null } // disable header but open all headers in here
+        },
+        MerchandiseDetail: {
+          screen: MerchandiseDetail,
+          navigationOptions: { title: '商品詳細', tabBarVisible: false }
+        }
+      },
+      {
+        headerMode: 'screen'
+      }
+    ),
+    Home: {
+      screen: Home
     },
+
     TransactionRecord: {
       screen: TransactionRecord,
       navigationOptions: { title: '交易紀錄' }
@@ -58,15 +104,23 @@ const AppNavigator = new TabNavigator(
         const ICON_MAP = {
           PersonalInfo: 'user',
           MerchandiseList: 'archive',
-          NewMerchandise: 'plus',
           MerchandiseGrid: 'th',
-          MerchandiseDetail: 'info-circle',
           TransactionRecord: 'list',
-          ShoppingCart: 'shopping-cart'
+          ShoppingCart: 'shopping-cart',
+          Home: 'home'
         };
         // You can return any component that you like here! We usually use an
         // icon component from react-native-vector-icons
-        return <Icon name={ICON_MAP[routeName] || ''} size={42} color={tintColor} />;
+        const routeParams = navigation.state.params || {};
+
+        return (
+          <BadgeIcon
+            name={ICON_MAP[routeName] || ''}
+            size={24}
+            color={tintColor}
+            numberOfBadges={routeParams.numberOfBadges}
+          />
+        );
       }
     }),
     tabBarOptions: {
@@ -85,8 +139,8 @@ const AppNavigator = new TabNavigator(
 
 const RootNavigator = new StackNavigator(
   {
-    Home: { screen: Home },
     App: { screen: AppNavigator },
+    Home: { screen: Home },
     Counter: { screen: Counter },
     Camera: { screen: Camera }
   },

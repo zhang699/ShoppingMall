@@ -58,15 +58,13 @@ class MerchandiseList extends Component {
     this.props.openModal({ modalView: this.modal, context: item });
   };
 
-  removeItem = (item) => {
-    console.warn('prepare to remove item...', item);
-  };
+  removeItem = (item) => {};
   modal = ({ context }) => (
     <View style={styles.modal}>
       <View style={styles.buttonContainer}>
         <Button
           color="red"
-          title="刪除"
+          title={`刪除 ${context.title}`}
           onPress={() => {
             this.removeItem(context);
             this.props.closeModal();

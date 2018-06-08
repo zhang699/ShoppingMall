@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { StyleSheet, View, ViewPropTypes, Text, FlatList, Button } from 'react-native';
 import MOCK from './__data__/shopping_cart';
+import { NavigationActions } from 'react-navigation';
 
 const styles = StyleSheet.create({
   container: {
@@ -46,8 +47,12 @@ const Header = () => (
   </View>
 );
 export default class ShoppingCart extends Component {
+  static propTypes = {
+    navigation: PropTypes.object.isRequired
+  };
   state = {
-    data: MOCK
+    data: MOCK,
+    buyNotification: 0
   };
   renderItem = ({ item }) => (
     <View style={styles.listItem}>
@@ -61,6 +66,18 @@ export default class ShoppingCart extends Component {
     </View>
   );
 
+  buy = () => {
+    const result = this.state.buyNotification + 1;
+    this.setState({
+      buyNotification: result
+    });
+
+    const setParamsAction = NavigationActions.setParams({
+      params: { numberOfBadges: result },
+      key: 'TransactionRecord'
+    });
+    this.props.navigation.dispatch(setParamsAction);
+  };
   render() {
     const total = this.state.data.reduce((accum, item) => accum + item.price, 0);
     return (
@@ -74,15 +91,12 @@ export default class ShoppingCart extends Component {
             />
           </View>
 
-          <View>
-            <FlatList />
-          </View>
           <View style={styles.buyerDetail}>
             <Text style={styles.total}>{`總計：${total}`}</Text>
           </View>
         </View>
 
-        <Button title="確認購買" />
+        <Button title="確認購買" onPress={this.buy} />
       </View>
     );
   }

@@ -33,8 +33,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   animatedIcon: {
-    height: 100,
-    width: 100
+    height: 50,
+    width: 50
   },
   center: {
     justifyContent: 'center',
@@ -99,19 +99,21 @@ export default class ImageGallery extends Component {
         <Image style={styles.image} source={{ uri: currentImageUri }} />
         <View style={[styles.container, styles.iconContainer]}>
           <TouchableOpacity
+            activeOpacity={0.7}
             style={[styles.iconRight, styles.center, styles.animatedIcon]}
             onPress={this.toRight}
           >
             <Animated.View style={[scaleAnimation]}>
-              <Icon size={56} color="#777" name="arrow-right" />
+              <Icon size={28} color="#ccc" name="arrow-right" />
             </Animated.View>
           </TouchableOpacity>
           <TouchableOpacity
+            activeOpacity={0.7}
             style={[styles.iconLeft, styles.center, styles.animatedIcon]}
             onPress={this.toLeft}
           >
             <Animated.View style={[scaleAnimation]}>
-              <Icon size={56} color="#777" name="arrow-left" />
+              <Icon size={28} color="#ccc" name="arrow-left" />
             </Animated.View>
           </TouchableOpacity>
         </View>

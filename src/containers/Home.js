@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Dimensions, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, View, Dimensions, TouchableOpacity, Text, PixelRatio } from 'react-native';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
   },
   instructions: {
     textAlign: 'center',
-    color: '#333333',
+    color: '#eee',
     marginBottom: 5
   }
 });
@@ -32,7 +32,7 @@ export default class Home extends Component {
 
   render() {
     const yourWindow = Dimensions.get('window');
-
+    const instructionStyle = StyleSheet.flatten(styles.instructions);
     return (
       <View style={styles.container}>
         <Text style={styles.welcome}>
@@ -40,8 +40,9 @@ export default class Home extends Component {
             yourWindow.height
           }`}
         </Text>
+        <Text>{`density is ${PixelRatio.get()}`}</Text>
         <TouchableOpacity onPress={this.toCamera}>
-          <Text style={styles.instructions}>Test your Camera</Text>
+          <Text style={{ ...instructionStyle, color: '#aba' }}>Test your Camera</Text>
         </TouchableOpacity>
       </View>
     );

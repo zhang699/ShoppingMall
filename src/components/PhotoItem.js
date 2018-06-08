@@ -5,8 +5,8 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 const styles = StyleSheet.create({
   defaultSize: {
-    width: 128,
-    height: 128
+    width: 64,
+    height: 64
   },
   dashBorder: {
     borderStyle: 'dashed',
@@ -19,8 +19,8 @@ const styles = StyleSheet.create({
     margin: 20
   },
   photo: {
-    width: 128,
-    height: 128
+    width: 64,
+    height: 64
   }
 });
 export default class PhotoItem extends Component {
@@ -39,7 +39,7 @@ export default class PhotoItem extends Component {
         onPress={this.props.onPress}
         style={[styles.defaultSize, styles.dashBorder, styles.itemContainer]}
       >
-        {displayAdd && <Icon size={58} name="plus" />}
+        {displayAdd && <Icon size={22} name="plus" />}
         {uri && <Image source={{ uri }} style={styles.photo} resizeMode="cover" />}
       </TouchableOpacity>
     );

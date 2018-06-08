@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import RatingBar from 'react-native-star-rating';
 import {
   StyleSheet,
   View,
@@ -10,7 +11,8 @@ import {
   TextInput,
   WebView,
   Linking,
-  TouchableOpacity
+  TouchableOpacity,
+  Animated
 } from 'react-native';
 import ImageGallery from './ImageGallery';
 import Comments from './Comments';
@@ -42,13 +44,13 @@ const styles = StyleSheet.create({
     borderRadius: 0
   },
   title: {
-    fontSize: 30
+    fontSize: 20
   },
   price: {
     alignSelf: 'flex-end'
   },
   metaInfo: {
-    fontSize: 24
+    fontSize: 20
   },
   product: {
     padding: 10,
@@ -73,6 +75,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
+  rating: {
+    flex: 0.2,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   sellerAvatar: {
     width: 64,
     height: 64,
@@ -82,9 +89,23 @@ const styles = StyleSheet.create({
 });
 export default class MerchandiseDetail extends Component {
   state = {
-    productDetail: MOCK
+    productDetail: MOCK,
+    rating: 0,
+    scaledValue: new Animated.Value(1)
   };
 
+  componentDidMount() {
+    const scaleUp = Animated.timing(this.state.scaledValue, {
+      duration: 200,
+      toValue: 1.3
+    });
+    const scaleDown = Animated.timing(this.state.scaledValue, {
+      duration: 200,
+      toValue: 1
+    });
+    this.bounceAnimation = Animated.sequence([scaleUp, scaleDown]);
+   
+  }
   onReplyPress = () => {};
   addComment = () => {};
   addToCart = () => {};
@@ -92,11 +113,11 @@ export default class MerchandiseDetail extends Component {
     Linking.openURL(`tel://${phone}`);
   };
   render() {
-    const { productDetail } = this.state;
+    const { productDetail, rating } = this.state;
     const showAddToCart = false;
     return (
       <View style={styles.container}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+        <ScrollView style={{ flex: 1 }}>
           <ImageGallery
             contentContainerStyle={styles.imageGallery}
             images={productDetail.picture_urls}
@@ -123,16 +144,24 @@ export default class MerchandiseDetail extends Component {
                 <Text style={[styles.title]}>{`電話${productDetail.user.phone}`}</Text>
               </TouchableOpacity>
             </View>
+            <Animated.View
+              style={[styles.rating, { transform: [{ scale: this.state.scaledValue }] }]}
+            >
+              <RatingBar
+                selectedStar={() => {
+                  this.setState({
+                    rating: rating === 0 ? 1 : 0
+                  });
+                  this.bounceAnimation.start(() => {
+                    this.bounceAnimation.reset();
+                  });
+                }}
+                maxStars={1}
+                rating={rating}
+                iconSet="FontAwesome"
+              />
+            </Animated.View>
           </View>
-
-          <View style={styles.product}>
-            <Text style={styles.title}>{productDetail.title}</Text>
-
-            <Text style={[styles.price, styles.metaInfo]}>{`$${productDetail.price}元`}</Text>
-
-            <Text style={[styles.count, styles.metaInfo]}>{`剩餘數量:${productDetail.count}`}</Text>
-          </View>
-
           <WebView
             scrollEnabled
             style={styles.description}
@@ -147,6 +176,14 @@ export default class MerchandiseDetail extends Component {
               }
             }}
           />
+          <View style={styles.product}>
+            <Text style={styles.title}>{productDetail.title}</Text>
+
+            <Text style={[styles.price, styles.metaInfo]}>{`$${productDetail.price}元`}</Text>
+
+            <Text style={[styles.count, styles.metaInfo]}>{`剩餘數量:${productDetail.count}`}</Text>
+          </View>
+
           <View style={styles.comment}>
             <Comments
               onReplyPress={this.onReplyPress}
@@ -165,11 +202,11 @@ export default class MerchandiseDetail extends Component {
               borderRadius={0}
               onPress={this.addComment}
               name="comments"
-              size={56}
+              size={28}
             />
 
             {showAddToCart && (
-              <Icon.Button borderRadius={0} onPress={this.addToCart} name="plus" size={56} />
+              <Icon.Button borderRadius={0} onPress={this.addToCart} name="plus" size={28} />
             )}
           </View>
         </View>

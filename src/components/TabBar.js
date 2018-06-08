@@ -17,13 +17,13 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     width: 100,
-    height: 40,
+    height: 30,
     marginHorizontal: 10,
     backgroundColor: 'transparent',
     borderColor: 'transparent'
   },
   text: {
-    fontSize: 22,
+    fontSize: 16,
     color: 'white',
     textAlign: 'center'
   }
