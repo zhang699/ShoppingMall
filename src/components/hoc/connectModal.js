@@ -67,7 +67,7 @@ export default function connectModal(WrappedComponent) {
           >
             <View style={styles.modalView}>
               <TouchableOpacity onPress={this.closeModal} style={styles.closeModalView} />
-              <WrappedContextModalView context={this.state.context} />
+              <WrappedContextModalView />
             </View>
           </Modal>
         </View>

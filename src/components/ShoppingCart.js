@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row'
   },
+  metaItem: {
+    flex: 0.3
+  },
   item: {
     fontSize: 18,
     flex: 0.3
@@ -59,7 +62,7 @@ export default class ShoppingCart extends Component {
       <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.itemTitle, styles.itemText]}>
         {item.title}
       </Text>
-      <View style={styles.item}>
+      <View style={styles.metaItem}>
         <Text style={[styles.itemText]}>{`NT$${item.price}`}</Text>
         <Text style={[styles.itemText]}>{`x${item.buy_count}`}</Text>
       </View>
@@ -78,6 +81,7 @@ export default class ShoppingCart extends Component {
     });
     this.props.navigation.dispatch(setParamsAction);
   };
+  keyExtractor = item => item.id;
   render() {
     const total = this.state.data.reduce((accum, item) => accum + item.price, 0);
     return (
@@ -85,6 +89,7 @@ export default class ShoppingCart extends Component {
         <View style={styles.container}>
           <View>
             <FlatList
+              keyExtractor={this.keyExtractor}
               ListHeaderComponent={Header}
               renderItem={this.renderItem}
               data={this.state.data}
