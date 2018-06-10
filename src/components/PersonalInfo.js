@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { StyleSheet, View, Image, TextInput, Button, TouchableOpacity } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Image,
+  TextInput,
+  Button,
+  TouchableOpacity,
+  KeyboardAvoidingView,
+  ScrollView
+} from 'react-native';
 import RNFetchBlob from 'react-native-fetch-blob';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -152,7 +161,7 @@ export default class PersonalInfo extends Component {
     const { form } = this.state;
     const formInputStyle = [styles.formInput, styles.borderInputItem];
     return (
-      <View style={[styles.container]}>
+      <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
         <Image style={styles.cover} blurRadius={5} resizeMode="cover" source={cover} />
         <View style={styles.form}>
           {this.renderPersonAvatar(form.name)}
@@ -189,7 +198,7 @@ export default class PersonalInfo extends Component {
           title="前往商品清單"
           onPress={this.goMerchandiseList}
         />
-      </View>
+      </ScrollView>
     );
   }
 }

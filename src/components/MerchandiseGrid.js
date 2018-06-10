@@ -103,22 +103,17 @@ export default class MerchandiseGrid extends Component {
     setTimeout(() => {
       const mock = this.shuffle(MOCK.map(item => ({ ...item, id: new Date().getTime() })));
 
-      this.setState(
-        {
-          refreshing: false,
-          data: add ? this.state.data.concat(mock) : mock
-        },
-        () => {
-          console.warn('this.data', this.state.data.length);
-        }
-      );
+      this.setState({
+        refreshing: false,
+        data: add ? this.state.data.concat(mock) : mock
+      });
     }, 1000);
   };
   onTabPress = (tab) => {
     this.refresh();
   };
 
-  keyExtractor = item => item.id;
+  keyExtractor = (item, index) => index;
   emptyView = () => {
     const { error } = this.state;
     return (
